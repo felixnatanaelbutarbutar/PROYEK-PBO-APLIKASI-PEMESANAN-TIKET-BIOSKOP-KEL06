@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplikasi.pemesanan.tiket.bioskop.kel06.FXMLDocumentController">
+    <VBox spacing="10" alignment="CENTER" prefWidth="600" prefHeight="600" layoutX="0" layoutY="0">
+        <Label text="Sistem Pemesanan Tiket Bioskop" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+        
+        <TableView fx:id="movieTable" prefWidth="580">
+            <columns>
+                <TableColumn fx:id="titleColumn" text="Judul Film" prefWidth="200"/>
+                <TableColumn fx:id="scheduleColumn" text="Jadwal" prefWidth="200"/>
+                <TableColumn fx:id="priceColumn" text="Harga" prefWidth="100"/>
+            </columns>
+        </TableView>
+        
+        <HBox spacing="10">
+            <TextField fx:id="titleField" promptText="Judul Film" />
+            <TextField fx:id="scheduleField" promptText="Jadwal Film" />
+            <TextField fx:id="priceField" promptText="Harga Tiket" />
+        </HBox>
+        
+        <HBox spacing="10">
+            <Button fx:id="addMovieButton" text="Tambah" />
+            <Button fx:id="updateMovieButton" text="Perbarui" />
+            <Button fx:id="deleteMovieButton" text="Hapus" />
+        </HBox>
+        
+        <HBox spacing="10">
+            <TextField fx:id="ticketCountField" promptText="Jumlah Tiket" />
+            <Button fx:id="bookTicketButton" text="Pesan Tiket" />
+        </HBox>
+        
+        <Label fx:id="totalCostLabel" text="Total Harga: Rp0" />
+        <Label fx:id="bookingInfoLabel" text="" />
+    </VBox>
+</AnchorPane>
