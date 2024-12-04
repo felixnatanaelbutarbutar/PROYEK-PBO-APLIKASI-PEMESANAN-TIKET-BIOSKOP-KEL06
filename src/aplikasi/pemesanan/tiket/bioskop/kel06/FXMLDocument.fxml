@@ -1,43 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplikasi.pemesanan.tiket.bioskop.kel06.FXMLDocumentController">
-    <VBox spacing="10" alignment="CENTER" prefWidth="600" prefHeight="600" layoutX="0" layoutY="0">
-        <Label text="Sistem Pemesanan Tiket Bioskop" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="aplikasi.pemesanan.tiket.bioskop.kel06.FXMLDocumentController"
+            styleClass="root-pane">
+    <VBox spacing="15" alignment="CENTER" prefWidth="700" prefHeight="650" 
+           stylesheets="/css/movie-ticket-style.css"
+           AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" 
+           AnchorPane.topAnchor="20" AnchorPane.bottomAnchor="20">
         
-        <TableView fx:id="movieTable" prefWidth="580">
+        <Label text="Sistem Pemesanan Tiket Bioskop" 
+               styleClass="title-label"/>
+        
+        <TableView fx:id="movieTable" prefWidth="660" styleClass="movie-table">
             <columns>
-                <TableColumn fx:id="titleColumn" text="Judul Film" prefWidth="200"/>
-                <TableColumn fx:id="scheduleColumn" text="Jadwal" prefWidth="200"/>
-                <TableColumn fx:id="priceColumn" text="Harga" prefWidth="100"/>
+                <TableColumn fx:id="titleColumn" text="Judul Film" prefWidth="250"/>
+                <TableColumn fx:id="scheduleColumn" text="Jadwal" prefWidth="250"/>
+                <TableColumn fx:id="priceColumn" text="Harga" prefWidth="160"/>
             </columns>
         </TableView>
         
-        <HBox spacing="10">
-            <TextField fx:id="titleField" promptText="Judul Film" />
-            <TextField fx:id="scheduleField" promptText="Jadwal Film" />
-            <TextField fx:id="priceField" promptText="Harga Tiket" />
+        <HBox spacing="10" alignment="CENTER">
+            <TextField fx:id="titleField" promptText="Judul Film" styleClass="input-field"/>
+            <TextField fx:id="scheduleField" promptText="Jadwal Film" styleClass="input-field"/>
+            <TextField fx:id="priceField" promptText="Harga Tiket" styleClass="input-field"/>
         </HBox>
         
-        <HBox spacing="10">
-            <Button fx:id="addMovieButton" text="Tambah" />
-            <Button fx:id="updateMovieButton" text="Perbarui" />
-            <Button fx:id="deleteMovieButton" text="Hapus" />
+        <HBox spacing="15" alignment="CENTER">
+            <Button fx:id="addMovieButton" text="Tambah" styleClass="action-button, add-button"/>
+            <Button fx:id="updateMovieButton" text="Perbarui" styleClass="action-button, update-button"/>
+            <Button fx:id="deleteMovieButton" text="Hapus" styleClass="action-button, delete-button"/>
         </HBox>
         
-        <HBox spacing="10">
-            <TextField fx:id="ticketCountField" promptText="Jumlah Tiket" />
-            <Button fx:id="bookTicketButton" text="Pesan Tiket" />
+        <HBox spacing="15" alignment="CENTER">
+            <TextField fx:id="ticketCountField" promptText="Jumlah Tiket" styleClass="input-field"/>
+            <Button fx:id="bookTicketButton" text="Pesan Tiket" styleClass="action-button, book-button"/>
         </HBox>
         
-        <Label fx:id="totalCostLabel" text="Total Harga: Rp0" />
-        <Label fx:id="bookingInfoLabel" text="" />
+        <VBox alignment="CENTER" spacing="5">
+            <Label fx:id="totalCostLabel" text="Total Harga: Rp0" styleClass="cost-label"/>
+            <Label fx:id="bookingInfoLabel" text="" styleClass="info-label"/>
+        </VBox>
     </VBox>
 </AnchorPane>
