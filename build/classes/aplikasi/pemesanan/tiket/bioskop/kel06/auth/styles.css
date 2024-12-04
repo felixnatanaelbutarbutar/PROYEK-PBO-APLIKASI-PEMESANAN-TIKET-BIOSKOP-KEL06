@@ -1,0 +1,41 @@
+/* styles.css */
+.root {
+    -fx-font-family: 'Arial';
+}
+
+.grid-pane {
+    -fx-padding: 20;
+    -fx-hgap: 10;
+    -fx-vgap: 10;
+    -fx-alignment: center;
+}
+
+.label {
+    -fx-font-size: 14px;
+}
+
+.text-field, .password-field {
+    -fx-pref-width: 200px;
+}
+
+.button {
+    -fx-pref-width: 100px;
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.button:hover {
+    -fx-background-color: #0056b3;
+}
+
+.text {
+    -fx-cursor: pointer;
+    -fx-fill: #007bff;
+}
+
+.text:hover {
+    -fx-underline: true;
+}

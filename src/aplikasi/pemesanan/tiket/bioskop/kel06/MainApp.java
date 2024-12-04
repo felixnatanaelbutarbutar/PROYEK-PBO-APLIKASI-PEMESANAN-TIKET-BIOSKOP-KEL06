@@ -1,27 +1,56 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package aplikasi.pemesanan.tiket.bioskop.kel06;
 
-/**
- *
- * @author felix
- */
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
 
+    private static Stage primaryStage;
+
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("FXMLDocument.fxml"));
-        Scene scene = new Scene(loader.load());
-        stage.setTitle("Aplikasi Pemesanan Tiket Bioskop");
-        stage.setScene(scene);
-        stage.show();
+        primaryStage = stage;
+        primaryStage.setTitle("Aplikasi Pemesanan Tiket Bioskop");
+        showLoginView();
+    }
+
+    public static void showLoginView() {
+        try {
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("auth/login.fxml"));
+            Pane pane = loader.load();
+            Scene scene = new Scene(pane);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void showRegisterView() {
+        try {
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("auth/register.fxml"));
+            Pane pane = loader.load();
+            Scene scene = new Scene(pane);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void showMainView() {
+        try {
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("FXMLDocument.fxml"));
+            Pane pane = loader.load();
+            Scene scene = new Scene(pane);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
