@@ -13,7 +13,8 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.Text?>
 
-<GridPane fx:id="gridPane" stylesheets="@../styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="aplikasi.pemesanan.tiket.bioskop.kel06.auth.LoginController">
+<GridPane fx:id="gridPane" stylesheets="@styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="aplikasi.pemesanan.tiket.bioskop.kel06.auth.LoginController">
+
     <padding><Insets bottom="20" left="20" right="20" top="20" /></padding>
    <children>
        <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="0" />

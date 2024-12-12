@@ -27,7 +27,8 @@ public class MovieController {
                     rs.getInt("id"),
                     rs.getString("title"),
                     rs.getString("schedule"),
-                    rs.getDouble("price")
+                    rs.getDouble("price"),
+                    rs.getInt("capacity")
                 ));
             }
         }
