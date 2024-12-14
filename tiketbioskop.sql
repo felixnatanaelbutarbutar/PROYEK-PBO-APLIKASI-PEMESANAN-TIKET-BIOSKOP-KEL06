@@ -55,7 +55,7 @@ CREATE TABLE `bookings` (
   UNIQUE KEY `booking_number` (`booking_number`),
   KEY `movie_id` (`movie_id`),
   CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`movie_id`) REFERENCES `movies` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 
@@ -67,7 +67,7 @@ LOCK TABLES `bookings` WRITE;
 
 
 
-insert  into `bookings`(`id`,`booking_number`,`movie_id`,`ticket_count`,`total_price`,`seat_numbers`,`booking_date`,`show_time`,`available_seats`) values (1,'20241213-4FSW',14,12,480,'A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, B1, B2','2024-12-13 21:09:53',NULL,50),(2,'20241213-SMLJ',15,49,1960,'A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, B1, B2, B3, B4, B5, B6, B7, B8, B9, B10, C1, C2, C3, C4, C5, C6, C7, C8, C9, C10, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, E1, E2, E3, E4, E5, E6, E7, E8, E9','2024-12-13 21:10:22',NULL,50),(3,'20241213-LZF5',15,1,40,'A1','2024-12-13 21:10:29',NULL,50);
+insert  into `bookings`(`id`,`booking_number`,`movie_id`,`ticket_count`,`total_price`,`seat_numbers`,`booking_date`,`show_time`,`available_seats`) values (20,'20241213-XVIQ',3,2,90,'A1, A2','2024-12-13 21:49:46',NULL,50);
 
 
 
@@ -90,7 +90,7 @@ CREATE TABLE `movies` (
   `price` double NOT NULL,
   `capacity` int(11) DEFAULT 50,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 
 
@@ -102,7 +102,7 @@ LOCK TABLES `movies` WRITE;
 
 
 
-insert  into `movies`(`id`,`title`,`schedule`,`price`,`capacity`) values (1,'Avatar 3','10:00 AM',50,50),(2,'Spiderman: No Way Home','1:00 PM',40,50),(3,'The Batman','4:00 PM',45,50),(8,'Spiderman: No Way Home','1:00 PM',40,50),(10,'BOKEP','1:00 PM',40,50),(14,'BOKEP','1:00 PM',40,50),(15,'AAN','21:00 PM',40,50);
+insert  into `movies`(`id`,`title`,`schedule`,`price`,`capacity`) values (1,'Avatar 3','10:00 AM',35000,50),(2,'Spiderman: No Way Home','1:00 PM',50000,50),(3,'The Batman','4:00 PM',25000,50),(8,'TOGO','21:00 PM',40000,50);
 
 
 

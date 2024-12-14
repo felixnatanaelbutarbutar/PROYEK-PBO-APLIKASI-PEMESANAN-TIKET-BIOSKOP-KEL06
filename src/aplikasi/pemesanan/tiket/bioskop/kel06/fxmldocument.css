@@ -1,72 +1,74 @@
-/*
- * Empty Stylesheet file.
- */
-
-/* Movie Ticket Booking Stylesheet */
 .root-pane {
-    -fx-background-color: linear-gradient(to bottom right, #2C3E50, #34495E);
+    -fx-background-color: #333333;
+    -fx-padding: 20px;
 }
 
 .title-label {
     -fx-font-size: 24px;
     -fx-font-weight: bold;
-    -fx-text-fill: white;
-    -fx-padding: 20px 0;
+    -fx-text-fill: #4CAF50;
 }
 
 .movie-table {
-    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-color: #444444;
+    -fx-border-color: #555555;
+    -fx-border-width: 1px;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
 }
 
-.movie-table .table-column {
-    -fx-background-color: #2C3E50;
-    -fx-text-fill: white;
+.movie-table .table-cell {
+    -fx-padding: 10px;
 }
 
-.movie-table .table-row-cell {
-    -fx-background-color: rgba(255, 255, 255, 0.1);
-    -fx-text-fill: white;
+.movie-table .table-row-cell:selected {
+    -fx-background-color: #555555;
 }
 
 .input-field {
-    -fx-background-color: rgba(255, 255, 255, 0.2);
-    -fx-text-fill: white;
-    -fx-prompt-text-fill: #BDC3C7;
-    -fx-background-radius: 5px;
-    -fx-padding: 8px;
+    -fx-background-color: #444444;
+    -fx-border-color: #555555;
+    -fx-border-width: 1px;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px;
 }
 
 .action-button {
-    -fx-background-radius: 5px;
-    -fx-padding: 8px 15px;
-    -fx-font-weight: bold;
-    -fx-text-fill: white;
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 15px;
     -fx-cursor: hand;
 }
 
 .add-button {
-    -fx-background-color: #27AE60;
+    -fx-background-color: #4CAF50;
 }
 
 .update-button {
-    -fx-background-color: #F39C12;
+    -fx-background-color: #FFC107;
 }
 
 .delete-button {
-    -fx-background-color: #E74C3C;
+    -fx-background-color: #F44336;
 }
 
 .book-button {
-    -fx-background-color: #3498DB;
+    -fx-background-color: #4CAF50;
+}
+
+.seat-button {
+    -fx-background-color: #4CAF50;
 }
 
 .cost-label {
-    -fx-font-size: 18px;
-    -fx-text-fill: white;
-    -fx-padding: 10px;
+    -fx-text-fill: #4CAF50;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
 }
 
 .info-label {
-    -fx-text-fill: #ECF0F1;
-    -fx-font-style: italic;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
 }

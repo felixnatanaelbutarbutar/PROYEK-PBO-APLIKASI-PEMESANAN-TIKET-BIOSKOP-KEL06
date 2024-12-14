@@ -77,9 +77,6 @@ public class FXMLDocumentController {
 
     @FXML
     private Label bookingInfoLabel;
-    
-    @FXML
-    private Label remainingTicketsLabel;
 
     private ObservableList<Movie> movieList;
 
@@ -99,11 +96,6 @@ public class FXMLDocumentController {
         bookTicketButton.setOnAction(event -> bookTicket());
 
         movieTable.setOnMouseClicked(this::populateFields);
-    }
-    
-    private void updateRemainingTickets(int ticketsRemaining) {
-    // Update jumlah tiket yang tersisa di label
-    remainingTicketsLabel.setText("Tersisa: " + ticketsRemaining + " tiket");
     }
 
     private void loadMovies() {
@@ -258,9 +250,6 @@ public class FXMLDocumentController {
             // Tampilkan informasi ke pengguna
             totalCostLabel.setText("Total Harga: Rp" + totalPrice);
             bookingInfoLabel.setText("Tiket berhasil dipesan!\nNomor Pemesanan: " + bookingNumber + "\nNomor Kursi: " + seatNumbers);
-            
-            // Pastikan tampilan kursi yang tersedia selalu diperbarui
-            displayAvailableSeats(selectedMovie.getId());
         }
     } catch (NumberFormatException e) {
         showAlert("Error", "Masukkan jumlah tiket yang valid!");
@@ -393,12 +382,6 @@ public class FXMLDocumentController {
             priceField.setText(String.valueOf(selectedMovie.getPrice()));
         }
     }
-    @FXML
-private void handleBookTicketButton(ActionEvent event) {
-    int ticketsRemaining = 50;  // Ini contoh jumlah tiket yang tersisa
-    ticketsRemaining--; // Misalnya, tiket berkurang 1
-    updateRemainingTickets(ticketsRemaining);
-}
 
     private void clearFields() {
         titleField.clear();
@@ -413,6 +396,7 @@ private void handleBookTicketButton(ActionEvent event) {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
 }
+
+
 

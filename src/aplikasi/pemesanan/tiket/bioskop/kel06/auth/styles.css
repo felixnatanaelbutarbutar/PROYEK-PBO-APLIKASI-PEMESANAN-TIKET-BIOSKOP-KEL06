@@ -1,58 +1,45 @@
-/* GridPane styling */
-#gridPane {
-    -fx-background-color: #f7f7f7;
-    -fx-border-color: #dcdcdc;
-    -fx-border-radius: 10px;
-    -fx-border-width: 2px;
-    -fx-background-radius: 10px;
-    -fx-padding: 20;
-    -fx-hgap: 10;
-    -fx-vgap: 15;
+.root {
+    -fx-background-color: #333333;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
-/* Label styling */
-Label {
-    -fx-font-size: 14px;
-    -fx-font-family: "Arial";
-    -fx-text-fill: #333333;
+.grid-pane {
+    -fx-padding: 20px;
+    -fx-vgap: 15px; /* Menambahkan jarak vertikal antar row */
 }
 
-/* TextField and PasswordField styling */
-TextField, PasswordField {
+.label {
+    -fx-text-fill: #FFFFFF;
     -fx-font-size: 14px;
-    -fx-font-family: "Arial";
-    -fx-border-color: #dcdcdc;
-    -fx-border-radius: 5px;
-    -fx-border-width: 2px;
-    -fx-background-radius: 5px;
-    -fx-padding: 5;
 }
 
-/* Button styling */
-Button {
-    -fx-background-color: #007BFF;
-    -fx-text-fill: white;
+.text-field, .password-field {
+    -fx-background-color: #444444;
+    -fx-border-color: #555555;
+    -fx-border-width: 1px;
+    -fx-text-fill: #FFFFFF;
     -fx-font-size: 14px;
-    -fx-font-family: "Arial";
-    -fx-border-radius: 5px;
-    -fx-background-radius: 5px;
-    -fx-padding: 10 20;
+    -fx-padding: 5px 10px;
+}
+
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 15px;
     -fx-cursor: hand;
 }
 
-Button:hover {
-    -fx-background-color: #0056b3;
+.button:hover {
+    -fx-background-color: #45a049;
 }
 
-/* Text link styling */
-Text {
-    -fx-font-size: 12px;
-    -fx-font-family: "Arial";
-    -fx-fill: #007BFF;
-    -fx-underline: true;
+.text {
+    -fx-fill: #FFFFFF;
+    -fx-font-size: 14px;
     -fx-cursor: hand;
 }
 
-Text:hover {
-    -fx-fill: #0056b3;
+.text:hover {
+    -fx-fill: #4CAF50;
 }
