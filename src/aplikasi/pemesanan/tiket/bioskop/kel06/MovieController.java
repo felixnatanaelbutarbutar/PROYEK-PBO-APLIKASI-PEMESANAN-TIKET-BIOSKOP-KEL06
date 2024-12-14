@@ -14,27 +14,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MovieController {
-    public List<Movie> getAllMovies() throws SQLException {
-        List<Movie> movies = new ArrayList<>();
-        String query = "SELECT * FROM Movies";
+    // Method untuk mendapatkan kursi yang tersedia
+    public List<Seat> getAvailableSeats(int movieId) throws SQLException {
+        List<Seat> availableSeats = new ArrayList<>();
+        String query = "SELECT * FROM Seats WHERE movie_id = ? AND is_booked = FALSE ORDER BY seat_number";
 
         try (Connection connection = DatabaseUtil.getConnection();
-             Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
+             PreparedStatement pstmt = connection.prepareStatement(query)) {
 
-            while (rs.next()) {
-                movies.add(new Movie(
-                    rs.getInt("id"),
-                    rs.getString("title"),
-                    rs.getString("schedule"),
-                    rs.getDouble("price"),
-                    rs.getInt("capacity")
-                ));
+            pstmt.setInt(1, movieId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    availableSeats.add(new Seat(
+                        rs.getInt("id"),
+                        rs.getInt("movie_id"),
+                        rs.getString("seat_number"),
+                        rs.getBoolean("is_booked")
+                    ));
+                }
             }
         }
-
-        return movies;
+        return availableSeats;
     }
+    public void bookSeats(List<Integer> seatIds) throws SQLException {
+    String query = "UPDATE Seats SET is_booked = TRUE WHERE id = ?";
+
+    try (Connection connection = DatabaseUtil.getConnection();
+         PreparedStatement pstmt = connection.prepareStatement(query)) {
+
+        for (int seatId : seatIds) {
+            pstmt.setInt(1, seatId);
+            pstmt.executeUpdate();
+        }
+    }
+}
 
     public void addMovie(String title, String schedule, double price) throws SQLException {
         String query = "INSERT INTO Movies (title, schedule, price) VALUES (?, ?, ?)";

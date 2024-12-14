@@ -9,8 +9,9 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" 
             fx:controller="aplikasi.pemesanan.tiket.bioskop.kel06.FXMLDocumentController"
             styleClass="root-pane">
+    
     <VBox spacing="15" alignment="CENTER" prefWidth="700" prefHeight="650" 
-           stylesheets="/css/movie-ticket-style.css"
+           stylesheets="fxmldocument.css"
            AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" 
            AnchorPane.topAnchor="20" AnchorPane.bottomAnchor="20">
         
@@ -40,11 +41,30 @@
         <HBox spacing="15" alignment="CENTER">
             <TextField fx:id="ticketCountField" promptText="Jumlah Tiket" styleClass="input-field"/>
             <Button fx:id="bookTicketButton" text="Pesan Tiket" styleClass="action-button, book-button"/>
+<!--            <Button fx:id="bookSeatsButton" text="Pilih Kursi" styleClass="action-button, seat-button"/>-->
         </HBox>
-        
+ 
         <VBox alignment="CENTER" spacing="5">
             <Label fx:id="totalCostLabel" text="Total Harga: Rp0" styleClass="cost-label"/>
             <Label fx:id="bookingInfoLabel" text="" styleClass="info-label"/>
         </VBox>
+        
+        <!-- Menambahkan kolom untuk menampilkan kursi yang tersedia -->
+        <GridPane fx:id="seatGrid" hgap="10" vgap="10" alignment="CENTER" 
+                  AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20" AnchorPane.bottomAnchor="100" AnchorPane.leftAnchor="350">
+            <!-- Ini adalah grid tempat kursi akan ditampilkan -->
+        </GridPane>
+        
+        <!-- Tombol untuk melihat kursi yang tersedia -->
+<!--        <HBox spacing="15" alignment="CENTER">
+            <Button fx:id="viewSeatsButton" text="Lihat Kursi Tersedia" styleClass="action-button, seat-button"/>
+        </HBox>-->
+
+        <!-- Kolom baru untuk menampilkan jumlah tiket yang tersisa -->
+        <VBox fx:id="rightColumn" spacing="15" AnchorPane.topAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20">
+            <Label text="Jumlah Tiket Tersisa" styleClass="ticket-remaining-label"/>
+            <Label fx:id="remainingTicketsLabel" text="Tersisa: 50 tiket" styleClass="remaining-tickets-info"/>
+        </VBox>
+        
     </VBox>
 </AnchorPane>

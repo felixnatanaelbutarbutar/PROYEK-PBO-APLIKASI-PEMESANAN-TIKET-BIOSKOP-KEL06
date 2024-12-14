@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -76,6 +77,9 @@ public class FXMLDocumentController {
 
     @FXML
     private Label bookingInfoLabel;
+    
+    @FXML
+    private Label remainingTicketsLabel;
 
     private ObservableList<Movie> movieList;
 
@@ -95,6 +99,11 @@ public class FXMLDocumentController {
         bookTicketButton.setOnAction(event -> bookTicket());
 
         movieTable.setOnMouseClicked(this::populateFields);
+    }
+    
+    private void updateRemainingTickets(int ticketsRemaining) {
+    // Update jumlah tiket yang tersisa di label
+    remainingTicketsLabel.setText("Tersisa: " + ticketsRemaining + " tiket");
     }
 
     private void loadMovies() {
@@ -214,41 +223,44 @@ public class FXMLDocumentController {
         if (ticketCount <= 0) throw new NumberFormatException();
 
         try (Connection connection = DatabaseUtil.getConnection()) {
-            // Cek jumlah tiket yang sudah dipesan untuk film ini
+            // Cek jumlah tiket yang tersedia
             String checkCapacityQuery = "SELECT SUM(ticket_count) AS total_tickets FROM Bookings WHERE movie_id = ?";
             PreparedStatement checkStatement = connection.prepareStatement(checkCapacityQuery);
             checkStatement.setInt(1, selectedMovie.getId());
             ResultSet resultSet = checkStatement.executeQuery();
 
-            int totalTicketsBooked = 0;
-            if (resultSet.next()) {
-                totalTicketsBooked = resultSet.getInt("total_tickets");
-            }
-
+            int totalTicketsBooked = resultSet.next() ? resultSet.getInt("total_tickets") : 0;
             int remainingTickets = selectedMovie.getCapacity() - totalTicketsBooked;
+
             if (ticketCount > remainingTickets) {
                 showAlert("Error", "Tiket tidak cukup tersedia! Sisa tiket: " + remainingTickets);
                 return;
             }
 
-            // Lanjutkan dengan pemesanan jika kapasitas mencukupi
+            // Hitung harga total
             double totalPrice = selectedMovie.getPrice() * ticketCount;
 
-            // Generate nomor pemesanan dan nomor kursi
+            // Generate nomor pemesanan dan kursi
             String bookingNumber = generateBookingNumber();
             String seatNumbers = generateSeatNumbers(ticketCount);
 
-            String insertQuery = "INSERT INTO Bookings (booking_number, movie_id, ticket_count, total_price, seat_numbers) VALUES (?, ?, ?, ?, ?)";
+            // Insert data pemesanan
+            String insertQuery = "INSERT INTO Bookings (booking_number, movie_id, ticket_count, total_price, seat_numbers, show_time) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement insertStatement = connection.prepareStatement(insertQuery);
             insertStatement.setString(1, bookingNumber);
             insertStatement.setInt(2, selectedMovie.getId());
             insertStatement.setInt(3, ticketCount);
             insertStatement.setDouble(4, totalPrice);
             insertStatement.setString(5, seatNumbers);
+            insertStatement.setString(6, selectedMovie.getShowTime()); // Pastikan metode `getShowTime()` tersedia
             insertStatement.executeUpdate();
 
+            // Tampilkan informasi ke pengguna
             totalCostLabel.setText("Total Harga: Rp" + totalPrice);
             bookingInfoLabel.setText("Tiket berhasil dipesan!\nNomor Pemesanan: " + bookingNumber + "\nNomor Kursi: " + seatNumbers);
+            
+            // Pastikan tampilan kursi yang tersedia selalu diperbarui
+            displayAvailableSeats(selectedMovie.getId());
         }
     } catch (NumberFormatException e) {
         showAlert("Error", "Masukkan jumlah tiket yang valid!");
@@ -257,6 +269,7 @@ public class FXMLDocumentController {
         e.printStackTrace();
     }
 }
+
 
     private String generateBookingNumber() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
@@ -324,7 +337,53 @@ public class FXMLDocumentController {
 
     return bookedSeat;
 }
+    @FXML
+    private ListView<String> seatListView; // Menampilkan kursi yang tersedia
 
+    @FXML
+    private Button bookSeatsButton; // Tombol untuk memesan kursi
+
+    // Tambahkan method untuk menampilkan kursi yang tersedia
+    public void displayAvailableSeats(int movieId) {
+        MovieController movieController = new MovieController();
+        try {
+            List<Seat> availableSeats = movieController.getAvailableSeats(movieId);
+            seatListView.getItems().clear();
+            seatListView.getItems().addAll(
+                availableSeats.stream().map(Seat::getSeatNumber).collect(Collectors.toList())
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Tambahkan logika untuk memesan kursi
+    @FXML
+    private void handleBookSeats() {
+        List<String> selectedSeats = seatListView.getSelectionModel().getSelectedItems();
+        MovieController movieController = new MovieController();
+
+        try {
+            List<Integer> seatIds = selectedSeats.stream()
+                .map(seatNumber -> getSeatIdFromNumber(seatNumber))
+                .collect(Collectors.toList());
+
+            movieController.bookSeats(seatIds);
+            System.out.println("Seats booked successfully!");
+            int selectedMovieId = 0;
+
+            // Perbarui tampilan kursi setelah pemesanan
+            displayAvailableSeats(selectedMovieId); // selectedMovieId harus disesuaikan
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Tambahkan method dummy untuk mendapatkan ID kursi dari nomor kursi
+    private int getSeatIdFromNumber(String seatNumber) {
+        // Implementasikan query atau logika untuk mendapatkan ID dari nomor kursi
+        return 0; // Ganti dengan implementasi yang benar
+    }
     @FXML
     private void populateFields(MouseEvent event) {
         Movie selectedMovie = movieTable.getSelectionModel().getSelectedItem();
@@ -334,6 +393,12 @@ public class FXMLDocumentController {
             priceField.setText(String.valueOf(selectedMovie.getPrice()));
         }
     }
+    @FXML
+private void handleBookTicketButton(ActionEvent event) {
+    int ticketsRemaining = 50;  // Ini contoh jumlah tiket yang tersisa
+    ticketsRemaining--; // Misalnya, tiket berkurang 1
+    updateRemainingTickets(ticketsRemaining);
+}
 
     private void clearFields() {
         titleField.clear();
@@ -348,5 +413,6 @@ public class FXMLDocumentController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
 }
 

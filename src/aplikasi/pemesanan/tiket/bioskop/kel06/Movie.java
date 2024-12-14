@@ -15,7 +15,8 @@ public class Movie {
     private String schedule;
     private double price;
     private int capacity; // Tambahkan atribut capacity
-
+    private String showTime;
+    
     // Constructor
     public Movie(int id, String title, String schedule, double price, int capacity) {
         this.id = id;
@@ -50,6 +51,14 @@ public class Movie {
 
     public double getPrice() {
         return price;
+    }
+    // Getter dan Setter untuk showTime
+    public String getShowTime() {
+        return showTime;
+    }
+
+    public void setShowTime(String showTime) {
+        this.showTime = showTime;
     }
 }
 
