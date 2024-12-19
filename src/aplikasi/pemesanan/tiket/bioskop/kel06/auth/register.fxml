@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.Text?>
 
-<GridPane fx:id="gridPane" xmlns:fx="http://javafx.com/fxml" fx:controller="aplikasi.pemesanan.tiket.bioskop.kel06.auth.RegisterController"
-          stylesheets="@../styles.css">
+<GridPane fx:id="gridPane" stylesheets="@styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="aplikasi.pemesanan.tiket.bioskop.kel06.auth.RegisterController">
     <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
     <Label text="Username:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
     <TextField fx:id="usernameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>

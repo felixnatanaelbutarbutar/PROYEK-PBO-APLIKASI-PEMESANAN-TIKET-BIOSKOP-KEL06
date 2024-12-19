@@ -112,7 +112,7 @@ public class FXMLDocumentController {
                         resultSet.getString("schedule"),
                         resultSet.getDouble("price"),
                         resultSet.getInt("capacity")
-                ));
+                )); 
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -332,41 +332,6 @@ public class FXMLDocumentController {
     @FXML
     private Button bookSeatsButton; // Tombol untuk memesan kursi
 
-    // Tambahkan method untuk menampilkan kursi yang tersedia
-    public void displayAvailableSeats(int movieId) {
-        MovieController movieController = new MovieController();
-        try {
-            List<Seat> availableSeats = movieController.getAvailableSeats(movieId);
-            seatListView.getItems().clear();
-            seatListView.getItems().addAll(
-                availableSeats.stream().map(Seat::getSeatNumber).collect(Collectors.toList())
-            );
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Tambahkan logika untuk memesan kursi
-    @FXML
-    private void handleBookSeats() {
-        List<String> selectedSeats = seatListView.getSelectionModel().getSelectedItems();
-        MovieController movieController = new MovieController();
-
-        try {
-            List<Integer> seatIds = selectedSeats.stream()
-                .map(seatNumber -> getSeatIdFromNumber(seatNumber))
-                .collect(Collectors.toList());
-
-            movieController.bookSeats(seatIds);
-            System.out.println("Seats booked successfully!");
-            int selectedMovieId = 0;
-
-            // Perbarui tampilan kursi setelah pemesanan
-            displayAvailableSeats(selectedMovieId); // selectedMovieId harus disesuaikan
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     // Tambahkan method dummy untuk mendapatkan ID kursi dari nomor kursi
     private int getSeatIdFromNumber(String seatNumber) {
@@ -397,6 +362,4 @@ public class FXMLDocumentController {
         alert.showAndWait();
     }
 }
-
-
 
